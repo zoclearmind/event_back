@@ -1,7 +1,6 @@
 package com.zocode.event.dto;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,4 +13,7 @@ public class EventDTO {
     private String description;
     private String location;
     private String imageUrl;
+    private Boolean active;
+    private Integer priority;
+    private LocalDateTime createdAt;
 }

@@ -39,6 +39,17 @@ public class Event {
 
     private String imageUrl;
 
+    @Column(nullable = false)
+    private Boolean active;
+
+    @Column(nullable = false)
+    private Boolean isDeleted;
+
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private Integer priority;
+
     // Relation avec Utilisateur (participants)
     @ManyToMany(mappedBy = "events")
     private List<Utilisateur> participants;

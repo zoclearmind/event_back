@@ -18,6 +18,9 @@ public class EventMapper {
         dto.setLocation(event.getLocation());
         dto.setDescription(event.getDescription());
         dto.setImageUrl(event.getImageUrl());
+        dto.setActive(event.getActive());
+        dto.setPriority(event.getPriority());
+        dto.setCreatedAt(event.getCreatedAt());
         return dto;
     }
 
@@ -32,6 +35,9 @@ public class EventMapper {
         event.setLocation(dto.getLocation());
         event.setDescription(dto.getDescription());
         event.setImageUrl(dto.getImageUrl());
+        event.setActive(dto.getActive());
+        event.setPriority(dto.getPriority());
+        event.setCreatedAt(dto.getCreatedAt());
         return event;
     }
 }

@@ -6,16 +6,19 @@ import com.zocode.event.mapper.EventMapper;
 import com.zocode.event.model.Event;
 import com.zocode.event.repository.EventRepository;
 import com.zocode.event.service.EventService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.crypto.Data;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +43,10 @@ public class EventServiceImpl implements EventService {
         event.setDateFin(eventCreateDTO.getDateFin());
         event.setDescription(eventCreateDTO.getDescription());
         event.setLocation(eventCreateDTO.getLocation());
+        event.setIsDeleted(false);
+        event.setPriority(2);
+        event.setActive(true);
+        event.setCreatedAt(LocalDateTime.now());
         Event savedEvent = eventRepository.save(event);
 
         if (image != null && !image.isEmpty()) {
@@ -56,6 +63,13 @@ public class EventServiceImpl implements EventService {
                 .stream()
                 .map(eventMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Event> getEventConverture() {
+        Boolean event=eventRepository.findByPriorityAndIsDeletedFalseAndActiveTrue(1).isPresent();
+        System.out.println(event);
+        return eventRepository.findByPriorityAndIsDeletedFalseAndActiveTrue(1);
     }
 
 
